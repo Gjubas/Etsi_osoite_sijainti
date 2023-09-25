@@ -48,11 +48,23 @@ export default function App() {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.High,
-      });
+      // current location
+      let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       console.log("Location:", location);
+
+      // set initial coordinates
+      setCoordinates({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+
+      setMapRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.0322,
+        longitudeDelta: 0.0221,
+      });
     })();
   }, []);
 
